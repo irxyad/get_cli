@@ -42,7 +42,8 @@ void addAppPage(String name, String bindingDir, String viewDir) {
     var onPageIndex = -1;
     while (pathSplit.isNotEmpty && onPageIndex == -1) {
       onPageIndex = lines.indexWhere(
-          (element) => element.contains('_Paths.${pathSplit.last.snakeCase},'),
+          (element) => element
+              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
           indexRoutes);
 
       pathSplit.removeLast();
@@ -91,10 +92,11 @@ void addAppPage(String name, String bindingDir, String viewDir) {
       }
     }
   }
-  var nameSnakeCase = name.snakeCase;
+  // var nameSnakeCase = name.snakeCase;
   var namePascalCase = name.pascalCase;
+  var nameCamelCase = name.camelCase;
   var line = '''${_getTabs(tabEspaces)}GetPage(
-${_getTabs(tabEspaces + 1)}name: $routesOrPath.${nameSnakeCase.toUpperCase()}, 
+${_getTabs(tabEspaces + 1)}name: $routesOrPath.$nameCamelCase, 
 ${_getTabs(tabEspaces + 1)}page:()=> const ${namePascalCase}View(), 
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
