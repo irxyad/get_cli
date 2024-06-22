@@ -42,8 +42,7 @@ void addAppPage(String name, String bindingDir, String viewDir) {
     var onPageIndex = -1;
     while (pathSplit.isNotEmpty && onPageIndex == -1) {
       onPageIndex = lines.indexWhere(
-          (element) => element
-              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
+          (element) => element.contains('_Paths.${pathSplit.last.snakeCase},'),
           indexRoutes);
 
       pathSplit.removeLast();
